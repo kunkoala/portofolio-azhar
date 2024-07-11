@@ -4,7 +4,10 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from dotenv import load_dotenv
 
-env = os.getenv('ENV', 'development')
+# determine the environment, default is development
+env = os.getenv('ENV', default='development')
+
+# load the environment variables, check whether it's development or production
 if env == 'development':
     load_dotenv('.env.development.local')
 elif env == 'production':
