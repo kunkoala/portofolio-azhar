@@ -12,6 +12,7 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "description": "My personal portofolio website built with Next.js and FastAPI, with TailwindCSS for styling. Contains blog, contact information, work experience, etc.",
   "dependencies": {
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
