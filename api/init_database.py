@@ -1,5 +1,5 @@
 from .database import Base, engine, SessionLocal
-from .guestbook.models import Guestbook
+from .models import Guestbook
 
 def init_database():
     Base.metadata.create_all(bind=engine)
