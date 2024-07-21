@@ -1,8 +1,13 @@
 import os
+from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy.pool import StaticPool
 from dotenv import load_dotenv
+
+from ..database import Base
+from ..main import app, get_db
 
 # determine the environment, default is development
 env = os.getenv('ENV', default='development')
