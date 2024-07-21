@@ -1,7 +1,6 @@
 import os
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import StaticPool
 from dotenv import load_dotenv
@@ -20,10 +19,27 @@ elif env == 'production':
     
 SQLALCHEMY_DATABASE_URL = os.getenv('DATABASE_URL')
 
+# debug the SQLALCHEMY_DATABASE_URL
 print(f"SQLALCHEMY_DATABASE_URL: {SQLALCHEMY_DATABASE_URL}")
 
-engine = create_engine(SQLALCHEMY_DATABASE_URL)
+engine = create_engine(SQLALCHEMY_DATABASE_URL, poolclass=StaticPool)
 
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-Base = declarative_base()
+Base.metadata.create_all(bind=engine)
+
+def override_get_db():
+    db = TestingSessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+        
+app.dependency_overrides[get_db] = override_get_db
+
+client = TestClient(app)
+
+def test_create_guestbook():
+    
+    # write the code for the test here
+    pass
