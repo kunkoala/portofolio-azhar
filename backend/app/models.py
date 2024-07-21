@@ -2,6 +2,7 @@ import datetime
 from .database import Base
 from sqlalchemy import Column, Integer, String, DateTime, TIMESTAMP, Text
 
+
 class Guestbook(Base):
     __tablename__ = "guestbook"
 

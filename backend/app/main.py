@@ -1,8 +1,7 @@
-# API
+
 import datetime
 from fastapi import FastAPI, Depends, HTTPException, Path, Query
 from fastapi.middleware.cors import CORSMiddleware
-from .init_database import init_database, add_values
 from sqlalchemy.orm import Session
 from .database import SessionLocal, engine, Base
 from .models import Guestbook
@@ -11,7 +10,8 @@ from pydantic import BaseModel, Field
 
 app = FastAPI()
 
-# Add CORS middleware, CORS middleware is used to allow cross-origin requests from the frontend to the backend API server. 
+# Add CORS middleware, CORS middleware is used to allow cross-origin requests
+# from the frontend to the backend API server.
 
 origins = [
     "http://localhost",
@@ -26,11 +26,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-'''
-CORS stands for Cross-Origin Resource Sharing. It is a mechanism that allows web browsers to securely make requests to a different domain than the one the web page originated from.
+'''CORS stands for Cross-Origin Resource Sharing. It is a mechanism that 
+allows web browsers to securely make requests to a different domain than the 
+one the web page originated from.
 
-By default, web browsers enforce a security policy called the Same-Origin Policy, which restricts web pages from making requests to a different domain. This policy is in place to prevent malicious scripts from accessing sensitive data or performing unauthorized actions on behalf of the user.
-'''
+By default, web browsers enforce a security policy called the Same-Origin 
+Policy, which restricts web pages from making requests to a different domain. 
+This policy is in place to prevent malicious scripts from accessing sensitive 
+data or performing unauthorized actions on behalf of the user.'''
 
 def get_db():
     db = SessionLocal()
