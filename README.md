@@ -1,8 +1,8 @@
-Hi there! This is a starter project for fastapi and nextjs, which I will try to create.
+A personal portofolio website project that showcases my ability to do a fullstack project, leveraging state-of-the-art technologies such as Next.js and FastAPI.
 
 ## Getting Started
 
-First, run the development server:
+First, run the development server for the front-end inside the front-end directory:
 
 ```bash
 npm run dev
@@ -14,11 +14,11 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Run the back-end FastAPI using uvicorn or a built-in fastAPI command in the backend directory
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```
+fastapi dev main.py
+```
 
 ## Learn More
 
@@ -29,8 +29,18 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## Tech Stack
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Frontend
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Next.js
+- Typescript
+- React
+
+### Backend
+
+- Python
+- FastAPI
+- SQLAlchemy
+- MariaDB/MySQL
+- MariaDBConnector for SQLAlchemy
