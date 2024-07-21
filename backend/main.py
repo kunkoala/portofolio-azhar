@@ -47,9 +47,17 @@ async def read_root():
 async def read_all(db: Annotated[Session, Depends(get_db)]):
     return db.query(Guestbook).all()
 
-@app.get("/api/init/database")
-async def init_db(db: Annotated[Session, Depends(get_db)]):
-    init_database()
-    add_values()
+
+'''
+TODO: Implement the following API endpoints for the guestbook:
+1. Create a new entry in the guestbook
+2. Read all entries in the guestbook
+3. Read a specific entry in the guestbook
+4. Update a specific entry in the guestbook
+5. Delete a specific entry in the guestbook
+'''
+
+@app.get("/api/guestbook")
+async def read_guestbook(db: Annotated[Session, Depends(get_db)]):
     return db.query(Guestbook).all()
 
