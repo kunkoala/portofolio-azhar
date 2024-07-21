@@ -3,11 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "fastapi-dev": "cross-env ENV=development && python -m uvicorn api.main:app --reload",
-    "fastapi-prod": "cross-env ENV=production && python -m uvicorn api.main:app",
-    "fastapi-install": "pip install -r requirements.txt",
-    "next-dev": "next dev",
-    "dev": "concurrently \"npm run next-dev\" \"npm run fastapi-dev\"",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
