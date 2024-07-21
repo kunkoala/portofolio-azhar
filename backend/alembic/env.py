@@ -16,8 +16,7 @@ if env == 'development':
 elif env == 'production':
     load_dotenv('.env.production.local')
     
-SQLALCHEMY_DATABASE_URL = os.getenv('DATABASE_URL_DEV') if env == 'development' else os.getenv('DATABASE_URL_PROD')
-import models
+SQLALCHEMY_DATABASE_URL = os.getenv('DATABASE_URL')
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -26,6 +25,9 @@ config = context.config
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
 fileConfig(config.config_file_name)
+
+# config for the database sqlalchemy url
+config.set_main_option("sqlalchemy.url", SQLALCHEMY_DATABASE_URL)
 
 # add your model's MetaData object here
 # for 'autogenerate' support
