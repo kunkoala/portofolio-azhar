@@ -1,24 +1,15 @@
 import os
 from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from dotenv import load_dotenv
+from app.config import settings
 
-# determine the environment, default is development
-env = os.getenv('ENV', default='development')
+# Load environment variables from .env file
+load_dotenv(f".env.{settings.ENV}.local")
 
-# load the environment variables, check whether it's development or production
-if env == 'development':
-    load_dotenv('.env.development.local')
-elif env == 'production':
-    load_dotenv('.env.production.local')
-    
-SQLALCHEMY_DATABASE_URL = os.getenv('DATABASE_URL')
-
+SQLALCHEMY_DATABASE_URL = settings.DATABASE_URL
 print(f"SQLALCHEMY_DATABASE_URL: {SQLALCHEMY_DATABASE_URL}")
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
-Base = declarative_base()
