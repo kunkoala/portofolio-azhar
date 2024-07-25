@@ -13,7 +13,7 @@ It stores application constants and loads .env
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
-        env_file=".env", env_ignore_empty=True, validate_default=False
+        env_file="../.env", env_ignore_empty=True, validate_default=False
     )
 
     # following the full-stack fast-api template
