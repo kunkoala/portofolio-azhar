@@ -1,15 +1,12 @@
 from functools import lru_cache
-from fastapi import FastAPI, Depends, HTTPException, Path, Query
+from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from typing import Annotated
 
 from .database import SessionLocal
 from .models import Guestbook
-from .config import settings
-from pydantic import BaseModel, Field
-
-
+from app.core.config import settings
 
 app = FastAPI()
 
