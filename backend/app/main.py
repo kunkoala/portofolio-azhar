@@ -1,12 +1,15 @@
-
-import datetime
+from functools import lru_cache
 from fastapi import FastAPI, Depends, HTTPException, Path, Query
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
-from .database import SessionLocal, engine, Base
-from .models import Guestbook
 from typing import Annotated
+
+from .database import SessionLocal
+from .models import Guestbook
+from .config import settings
 from pydantic import BaseModel, Field
+
+
 
 app = FastAPI()
 
@@ -35,6 +38,7 @@ Policy, which restricts web pages from making requests to a different domain.
 This policy is in place to prevent malicious scripts from accessing sensitive 
 data or performing unauthorized actions on behalf of the user.'''
 
+
 def get_db():
     db = SessionLocal()
     try:
@@ -42,9 +46,25 @@ def get_db():
     finally:
         db.close()
 
+
 @app.get("/api/hello")
 async def read_root():
     return {"message": "Hello World! This API is now working yippie!"}
+
+
+@lru_cache
+def get_settings():
+    return settings
+
+
+@app.get("/info")
+async def info(settings: Annotated[settings, Depends(get_settings)]):
+    return {
+        "app_name": settings.APP_NAME,
+        "ENV (prod or dev)": settings.ENVIRONMENT,
+        "DATABASE_ENV": str(settings.SQLALCHEMY_DATABASE_URI),
+    }
+
 
 @app.get("/")
 async def read_all(db: Annotated[Session, Depends(get_db)]):
@@ -60,7 +80,7 @@ TODO: Implement the following API endpoints for the guestbook:
 5. Delete a specific entry in the guestbook
 '''
 
+
 @app.get("/api/guestbook")
 async def read_guestbook(db: Annotated[Session, Depends(get_db)]):
     return db.query(Guestbook).all()
-
