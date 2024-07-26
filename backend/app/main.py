@@ -8,7 +8,10 @@ from .database import SessionLocal
 from .models import Guestbook
 from app.core.config import settings
 
-app = FastAPI()
+app = FastAPI(
+    title=settings.APP_NAME,
+    openapi_url=f"{settings.API_V1_STR}/openapi.json",
+)
 
 # Add CORS middleware, CORS middleware is used to allow cross-origin requests
 # from the frontend to the backend API server.
