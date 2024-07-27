@@ -1,12 +1,13 @@
-from functools import lru_cache
-from fastapi import FastAPI, Depends
+
+from fastapi import FastAPI, Depends, Path
 from fastapi.middleware.cors import CORSMiddleware
-from sqlalchemy.orm import Session
+
 from typing import Annotated
 
-from .database import SessionLocal
+
 from .models import Guestbook
 from app.core.config import settings
+from app.api.main import api_router
 
 app = FastAPI(
     title=settings.APP_NAME,
@@ -39,48 +40,14 @@ This policy is in place to prevent malicious scripts from accessing sensitive
 data or performing unauthorized actions on behalf of the user.'''
 
 
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+# include routers from app/api/endpoints
+
+app.include_router(api_router, prefix=settings.API_V1_STR)
 
 
-@app.get("/api/hello")
-async def read_root():
-    return {"message": "Hello World! This API is now working yippie!"}
 
 
-@lru_cache
-def get_settings():
-    return settings
 
 
-@app.get("/info")
-async def info(settings: Annotated[settings, Depends(get_settings)]):
-    return {
-        "app_name": settings.APP_NAME,
-        "ENV (prod or dev)": settings.ENVIRONMENT,
-        "DATABASE_ENV": str(settings.SQLALCHEMY_DATABASE_URI),
-    }
 
 
-@app.get("/")
-async def read_all(db: Annotated[Session, Depends(get_db)]):
-    return db.query(Guestbook).all()
-
-
-'''
-TODO: Implement the following API endpoints for the guestbook:
-1. Create a new entry in the guestbook
-2. Read all entries in the guestbook
-3. Read a specific entry in the guestbook
-4. Update a specific entry in the guestbook
-5. Delete a specific entry in the guestbook
-'''
-
-
-@app.get("/api/guestbook")
-async def read_guestbook(db: Annotated[Session, Depends(get_db)]):
-    return db.query(Guestbook).all()
