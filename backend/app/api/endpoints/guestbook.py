@@ -26,3 +26,13 @@ async def read_guestbook(session: Session):
 @router.get("/api/guestbook/{entry_id}")
 async def read_guestbook_entry(entry_id: Annotated[int, Path()], session: Session):
     return db.query(Guestbook).filter(Guestbook.id == entry_id).first()
+
+
+# create a new entry in the guestbook
+@router.post("/api/guestbook")
+async def create_guestbook_entry(guestbook: GuestbookCreate, session: Session):
+    new_entry = Guestbook(**guestbook.dict())
+    session.add(new_entry)
+    session.commit()
+    session.refresh(new_entry)
+    return
