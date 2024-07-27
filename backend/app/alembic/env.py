@@ -1,13 +1,14 @@
+import os
+
 from logging.config import fileConfig
 
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 
 from alembic import context
-
 # import Base and SQLALCHEMY_DATABASE_URL from the database module
-from database import Base
-from database import SQLALCHEMY_DATABASE_URL
+from models import Base
+from core.config import settings
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -18,13 +19,12 @@ config = context.config
 fileConfig(config.config_file_name)
 
 # config for the database sqlalchemy url
-config.set_main_option("sqlalchemy.url", SQLALCHEMY_DATABASE_URL)
+config.set_main_option("sqlalchemy.url", str(settings.SQLALCHEMY_DATABASE_URI))
 
 # add your model's MetaData object here
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-
 
 target_metadata = Base.metadata
 
@@ -33,6 +33,10 @@ target_metadata = Base.metadata
 # can be acquired:
 # my_important_option = config.get_main_option("my_important_option")
 # ... etc.
+
+def get_db_url():
+    user = os.getenv("MARIADB_USER",)
+    
 
 def run_migrations_offline() -> None:
     """Run migrations in 'offline' mode.
