@@ -1,10 +1,8 @@
-from typing import Annotated, List
+from typing import Annotated, List, Any
 
 from app.api.dependencies import SessionDependency as Session
-from app.schemas import GuestbookPublic, GuestbookCreate, Guests, Message
-from app.models import Guestbook
-
-from sqlalchemy import select, func
+from app.models import Guestbook, GuestbookCreate, GuestbookPublic, Guests, Message
+from sqlmodel import select, func
 
 from fastapi import APIRouter, HTTPException, Path
 
@@ -20,44 +18,34 @@ TODO: Implement the following API endpoints for the guestbook:
 '''
 
 @router.get("/guestbook", response_model=Guests)
-async def read_guestbook_stats(session: Session, skip: int = 0, limit: int = 100):
+async def read_guestbook_stats(session: Session, skip: int = 0, limit: int = 100) -> Any:
     """
     Get the total number of entries in the guestbook
     """
     # Get the total count of entries
     count_statement = select(func.count()).select_from(Guestbook)
-    count_result = session.execute(count_statement).scalar()
+    count_result = session.exec(count_statement).one()
 
     # Get the guestbook entries
     guests_statement = select(Guestbook).offset(skip).limit(limit)
-    guests_result = session.execute(guests_statement).scalars().all()
+    guests_result = session.exec(guests_statement).all()
 
     if count_result == 0:
         raise HTTPException(status_code=404, detail="No guestbook entries found")
 
     # Convert SQLAlchemy models to Pydantic models
     guests = [GuestbookPublic.model_validate(guest) for guest in guests_result]
-
-    print(guests)
+    
     return Guests(data=guests, count=count_result)
-
-# get all entries in the guestbook
-# @router.get("/guestbook", response_model=List[Guestbook])
-# async def read_guestbook(session: Session):
-#     """
-#     Get all entries in the guestbook
-#     """
-#     guestbook = session.query(Guestbook).all()
-#     return guestbook
 
 # get a specific entry in the guestbook
 @router.get("/guestbook/{entry_id}", response_model=GuestbookPublic)
 async def read_guestbook_entry(entry_id: Annotated[int, Path()], session: Session):
-    entry = session.query(Guestbook).filter(Guestbook.id == entry_id).first()
+    # much more simpler code in sqlmodel
+    entry = session.get(Guestbook, entry_id)
     if entry is None:
         raise HTTPException(status_code=404, detail="Guestbook entry not found")
     return entry
-
 
 # create a new entry in the guestbook
 @router.post("/guestbook", response_model=GuestbookPublic)
@@ -65,7 +53,7 @@ async def create_guestbook_entry(guestbook_in: GuestbookCreate, session: Session
     """
     Create a new guest entry in the guestbook
     """
-    guest = Guestbook(**guestbook_in.model_dump())
+    guest = Guestbook.model_validate(guestbook_in)
     session.add(guest)
     session.commit()
     session.refresh(guest)
