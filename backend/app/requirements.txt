@@ -1,7 +1,6 @@
 app==0.0.1
 fastapi==0.111.1
-pydantic==1.10.12
+pydantic==2.8.2
 pydantic_core==2.20.1
 pydantic_settings==2.3.4
-SQLAlchemy==2.0.27
-SQLAlchemy==2.0.25
+SQLAlchemy==2.0.31
