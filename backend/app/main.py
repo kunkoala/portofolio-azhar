@@ -2,10 +2,6 @@
 from fastapi import FastAPI, Depends, Path
 from fastapi.middleware.cors import CORSMiddleware
 
-from typing import Annotated
-
-
-from .models import Guestbook
 from app.core.config import settings
 from app.api.main import api_router
 
