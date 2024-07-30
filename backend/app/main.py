@@ -5,10 +5,25 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import settings
 from app.api.main import api_router
 
+description = """
+This is the backend API server for the Guestbook app. The Guestbook app is a simple web application that allows users to leave messages on a public guestbook.
+
+## Guestbook
+
+The Guestbook API allows you to perform the following operations:
+- Create a new entry in the guestbook
+- Read all entries in the guestbook
+- Read a specific entry in the guestbook
+- Update a specific entry in the guestbook
+- Delete a specific entry in the guestbook
+"""
+
 app = FastAPI(
     title=settings.APP_NAME,
     openapi_url=f"{settings.API_V1_STR}/openapi.json",
+    description=description,
 )
+
 
 # Add CORS middleware, CORS middleware is used to allow cross-origin requests
 # from the frontend to the backend API server.
