@@ -7,7 +7,6 @@ from sqlalchemy import pool
 
 from alembic import context
 # import Base and SQLALCHEMY_DATABASE_URL from the database module
-from models import Base
 from core.config import settings
 
 # this is the Alembic Config object, which provides
@@ -26,7 +25,10 @@ config.set_main_option("sqlalchemy.url", str(settings.SQLALCHEMY_DATABASE_URI))
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
 
-target_metadata = Base.metadata
+# change the target_metadata to the SQLMODEL Base.metadata for the alembic auto generation of migrations
+from models import SQLModel # noqa
+
+target_metadata = SQLModel.metadata
 
 
 # other values from the config, defined by the needs of env.py,
