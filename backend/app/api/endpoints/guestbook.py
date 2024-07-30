@@ -65,7 +65,7 @@ def delete_guestbook_entry(entry_id: Annotated[int, Path()], session: Session) -
     """
     Delete an item from the guestbook
     """
-    guest = session.query(Guestbook).filter(Guestbook.id == entry_id).first()
+    guest = session.get(Guestbook, entry_id)
     if not guest:
         raise HTTPException(status_code=404, detail="Guestbook entry not found")
     # TODO: add a conditional for checking current user id with the guestbook entry id relation
