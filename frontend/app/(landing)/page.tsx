@@ -1,12 +1,19 @@
-import { getByQuery } from "@/lib/api";
+import { HeroSection } from "./hero-section";
+import { ExperienceSection } from "./experience-section";
+import { AboutSection } from "./about-section";
+import { ProjectsSection } from "./projects-section";
 
 export default async function Home() {
-  const data = await getByQuery("/project_settings/hello");
-
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1>This is a message</h1>
-      <p>The message: {JSON.stringify(data)}</p>
+    <main className="min-h-screen">
+      <div className="container py-12 sm:py-16 md:py-20">
+        <div className="flex flex-col justify-center items-center">
+          <HeroSection />
+          <AboutSection />
+          <ProjectsSection />
+          <ExperienceSection />
+        </div>
+      </div>
     </main>
   );
 }
