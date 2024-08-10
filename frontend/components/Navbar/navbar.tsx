@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { GithubIcon, SunIcon } from "lucide-react";
-import { EXTERNAL_LINKS } from "@/lib/constants";
+import { EXTERNAL_LINKS, PATHS } from "@/lib/constants";
 
 const menuItems = [
   { href: "#hero-section", label: "Home" },
@@ -26,7 +26,7 @@ export function Navbar() {
             <Link
               key={item.label}
               href={item.href}
-              className="text-md font-medium text-foreground hover:text-primary transition-colors"
+              className="text-md font-medium text-foreground hover:text-pink-500 transition-colors"
               prefetch={false}
             >
               {item.label}
@@ -74,6 +74,15 @@ export function Navbar() {
 function LinksAndToggle() {
   return (
     <div className="flex items-center gap-4">
+      <Link href={PATHS.BLOG} className="text-sm md:text-md">
+        Blog
+      </Link>
+      <Link
+        className="text-sm md:text-md font-semibold bg-pink-100/40 p-2 rounded-md hover:bg-gray-100 transition"
+        href={PATHS.GUESTBOOK}
+      >
+        Guestbook
+      </Link>
       <Link
         href={EXTERNAL_LINKS.GITHUB_PROFILE}
         target="_blank"
