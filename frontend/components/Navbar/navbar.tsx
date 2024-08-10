@@ -5,16 +5,15 @@ import { GithubIcon, SunIcon } from "lucide-react";
 import { EXTERNAL_LINKS } from "@/lib/constants";
 
 const menuItems = [
-  { href: "#", label: "Home" },
-  { href: "#", label: "About" },
-  { href: "#", label: "Experience" },
-  { href: "#", label: "Projects" },
-  { href: "#", label: "Contact" },
+  { href: "#hero-section", label: "Home" },
+  { href: "#about-section", label: "About" },
+  { href: "#experience-section", label: "Experience" },
+  { href: "#projects-section", label: "Projects" },
 ];
 
 export function Navbar() {
   return (
-    <header className="fixed top-0 z-50 w-full bg-background shadow-sm">
+    <header className="top-0 z-50 w-full bg-background shadow-sm">
       <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
         <div className="flex gap-4 items-center">
           <Link href="#" className="flex items-center gap-2" prefetch={false}>
@@ -22,7 +21,7 @@ export function Navbar() {
             <span className="text-lg font-semibold">Azhar</span>
           </Link>
         </div>
-        <nav className="hidden space-x-4 sm:flex">
+        <nav className="hidden gap-4 sm:flex">
           {menuItems.map((item) => (
             <Link
               key={item.label}
