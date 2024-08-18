@@ -3,6 +3,7 @@ import { Inter, Lora } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar/navbar";
 import { Footer } from "@/components/Navbar/footer";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const lora = Lora({
   subsets: ["latin"],
@@ -23,9 +24,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={lora.className}>
-        <Navbar />
-        {children}
-        <Footer />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Navbar />
+          {children}
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

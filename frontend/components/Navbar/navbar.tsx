@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { GithubIcon, SunIcon } from "lucide-react";
+import { GithubIcon } from "lucide-react";
+import { ThemeToggle } from "@/components/Navbar/theme-toggle";
 import { EXTERNAL_LINKS, PATHS } from "@/lib/constants";
 
 const menuItems = [
@@ -26,7 +27,7 @@ export function Navbar() {
             <Link
               key={item.label}
               href={item.href}
-              className="text-md font-medium text-foreground hover:text-pink-500 transition-colors"
+              className="text-md font-medium hover:text-pink-500 transition-colors"
               prefetch={false}
             >
               {item.label}
@@ -91,9 +92,7 @@ function LinksAndToggle() {
       >
         <GithubIcon className="h-6 w-6" />
       </Link>
-      <Button variant="ghost" size="icon">
-        <SunIcon className="h-6 w-6" />
-      </Button>
+      <ThemeToggle />
     </div>
   );
 }
