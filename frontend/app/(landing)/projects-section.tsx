@@ -7,7 +7,7 @@ export function ProjectsSection() {
       id="projects-section"
     >
       <div className="container px-4 md:px-6">
-        <h1 className="text-2xl font-bold">Projects</h1>
+        <h1 className="text-5xl tracking-tight font-bold text-center">Projects</h1>
         <AppleCardsCarouselDemo />
       </div>
     </section>
