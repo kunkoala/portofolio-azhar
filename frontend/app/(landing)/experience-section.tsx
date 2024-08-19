@@ -1,14 +1,14 @@
 export function ExperienceSection() {
   return (
     <section
-      className="min-h-screen flex flex-col items-center  bg-inherit dark:bg-inherit py-12 md:py-16"
+      className="min-h-screen flex flex-col items-center  bg-inherit dark:bg-inherit py-12 md:py-16 lg:py-20"
       id="experience-section"
     >
       <div className="container px-4 md:px-6 flex flex-col items-center">
         <h1 className="text-5xl tracking-tight font-bold text-center">
           Experience
         </h1>
-        <div className="flex flex-col py-12 max-w-5xl">
+        <div className="flex flex-col gap-y-6 py-12 max-w-5xl">
           {experience.map((exp) => (
             <ExperienceTable {...exp} />
           ))}
@@ -55,8 +55,8 @@ const experience = [
 
 function ExperienceTable(experience: Experience) {
   return (
-    <div className="flex flex-col gap-1 py-4">
-      <h2 className="text-xl font-bold">
+    <div className="flex flex-col group gap-1 transition hover:bg-gray-100 p-4 rounded-lg">
+      <h2 className="text-xl font-bold group-hover:text-blue-900">
         {experience.title} @ {experience.company}
       </h2>
       <p className="text-muted-foreground">
