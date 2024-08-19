@@ -6,34 +6,39 @@ import { ThemeToggle } from "@/components/Navbar/theme-toggle";
 import { EXTERNAL_LINKS, PATHS } from "@/lib/constants";
 
 const menuItems = [
-  { href: "#hero-section", label: "Home" },
-  { href: "#about-section", label: "About" },
-  { href: "#experience-section", label: "Experience" },
+  { href: "#hero-section", label: "About" },
   { href: "#projects-section", label: "Projects" },
+  { href: "#experience-section", label: "Experience" },
 ];
 
-export function Navbar() {
+export function Navbar({ showMenu = true }: { showMenu?: boolean }) {
   return (
     <header className="top-0 z-50 w-full bg-background shadow-sm">
       <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
         <div className="flex gap-4 items-center">
-          <Link href="#" className="flex items-center gap-2" prefetch={false}>
+          <Link
+            href={PATHS.HOME}
+            className="flex items-center gap-2"
+            prefetch={false}
+          >
             <MountainIcon className="h-6 w-6" />
             <span className="text-lg font-semibold">Azhar</span>
           </Link>
         </div>
-        <nav className="hidden gap-4 sm:flex">
-          {menuItems.map((item) => (
-            <Link
-              key={item.label}
-              href={item.href}
-              className="text-md font-medium hover:text-pink-500 transition-colors"
-              prefetch={false}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
+        {showMenu && (
+          <nav className="hidden gap-4 sm:flex">
+            {menuItems.map((item) => (
+              <Link
+                key={item.label}
+                href={item.href}
+                className="text-md font-medium hover:text-pink-500 transition-colors"
+                prefetch={false}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+        )}
         <div className="hidden sm:flex">
           <LinksAndToggle />
         </div>
@@ -46,18 +51,21 @@ export function Navbar() {
           </SheetTrigger>
           <SheetContent side="right" className="w-64 bg-background p-4">
             <div className="flex flex-col justify-between gap-4 h-full">
-              <nav className="grid gap-4">
-                {menuItems.map((item) => (
-                  <Link
-                    key={item.label}
-                    href={item.href}
-                    className="text-sm font-medium text-foreground hover:text-primary transition-colors"
-                    prefetch={false}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </nav>
+              {showMenu && (
+                <nav className="grid gap-4">
+                  {menuItems.map((item) => (
+                    <Link
+                      key={item.label}
+                      href={item.href}
+                      className="text-sm font-medium text-foreground hover:text-primary transition-colors"
+                      prefetch={false}
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </nav>
+              )}
+
               <div className="flex flex-col gap-2">
                 <LinksAndToggle />
                 <p className="text-sm text-foreground">
