@@ -1,7 +1,7 @@
 export function ExperienceSection() {
   return (
     <section
-      className="min-h-screen flex flex-col items-center  bg-inherit dark:bg-inherit py-12 md:py-16 lg:py-20"
+      className="min-h-screen flex flex-col items-center  bg-inherit dark:bg-inherit py-12 md:py-16"
       id="experience-section"
     >
       <div className="container px-4 md:px-6 flex flex-col items-center">

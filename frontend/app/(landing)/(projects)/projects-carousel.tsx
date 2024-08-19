@@ -8,7 +8,7 @@ import sampleStock from "@/assets/stock-images/sample-stock.jpg";
 import sensusStock from "@/assets/stock-images/sensus-stock.jpg";
 import iconicWeb from "@/assets/stock-images/iconic-web.png";
 
-import { DummyContent } from "@/app/(landing)/(projects)/carousel-contents";
+import { DummyContent, SensusContent } from "@/app/(landing)/(projects)/carousel-contents";
 
 
 export function AppleCardsCarouselDemo() {
@@ -30,7 +30,7 @@ const data = [
     category: "Full-stack Web Development",
     title: "Sensus PPI Jerman",
     src: sensusStock,
-    content: <DummyContent />,
+    content: <SensusContent />,
   },
   {
     category: "Front-end Web Development",
