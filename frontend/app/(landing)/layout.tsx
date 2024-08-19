@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/Navbar/navbar";
 import { Footer } from "@/components/Navbar/footer";
+import { lora } from "../layout";
 
 export default function BlogLayout({
   children,
@@ -7,12 +8,10 @@ export default function BlogLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>
-        <Navbar />
-        {children}
-        <Footer />
-      </body>
-    </html>
+    <section className={lora.className}>
+      <Navbar />
+      {children}
+      <Footer />
+    </section>
   );
 }
