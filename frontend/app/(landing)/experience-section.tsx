@@ -10,7 +10,7 @@ export function ExperienceSection() {
         </h1>
         <div className="flex flex-col gap-y-6 py-12 max-w-5xl">
           {experience.map((exp) => (
-            <ExperienceTable {...exp} />
+            <ExperienceTable key={exp.title} {...exp} />
           ))}
         </div>
       </div>
