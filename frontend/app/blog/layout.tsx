@@ -1,6 +1,6 @@
 import { Navbar } from "@/components/Navbar/navbar";
 import { Footer } from "@/components/Navbar/footer";
-import { lora } from "../layout";
+import { lora } from "@/app/layout";
 
 export default function BlogLayout({
   children,
