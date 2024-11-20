@@ -1,15 +1,9 @@
 import type { Metadata } from "next";
-import { Lora } from "next/font/google";
+import { lora } from "@/lib/fonts";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 
-export const lora = Lora({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-lora",
-});
-
-export const metadata: Metadata = {
+const metadata: Metadata = {
   title: "Azhar Rahadian",
   description: "Personal portofolio website of Azhar Rahadian",
 };
